@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en" data-t="aurora" data-m="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>i.k.val – Reifying Artificial Intelligence, Machine Learning</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&family=Fraunces:opsz,wght@9..144,400;9..144,600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#060a1c;--fg:#eef1ff;--mut:#9aa6cf;--card:rgba(255,255,255,.05);--line:rgba(255,255,255,.12);--a:#8b93ff;--b:#22d3ee;--c:#f472b6;--r:22px;--hf:'Space Grotesk',sans-serif;--bf:'Inter',system-ui,sans-serif;--on:#060a1c;--blur:blur(14px);--nav:rgba(6,10,28,.7);color-scheme:dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-behavior:smooth;scroll-padding-top:calc(80px + env(safe-area-inset-top,0px));height:100%}
+
+
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:400 17px/1.65 var(--bf);transition:background .4s,color .4s;overflow-x:hidden}
+a{color:inherit}h1,h2,h3{font-family:var(--hf);margin:0;line-height:1.08;letter-spacing:-.025em}
+p{margin:0}.w{max-width:1180px;margin:0 auto;padding:0 24px}
+:focus-visible{outline:3px solid var(--a);outline-offset:3px}
+header{position:fixed;inset:0 0 auto;z-index:20;padding-top:env(safe-area-inset-top,0px);background:var(--nav);backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur);border-bottom:1px solid var(--line)}
+.nav{height:68px;display:flex;align-items:center;gap:14px}
+.logo{font:700 26px var(--hf);text-decoration:none;margin-right:auto;letter-spacing:-.04em}
+.logo i{font-style:normal;color:var(--a)}
+#links{display:flex;gap:2px}#links a{text-decoration:none;color:var(--mut);font-size:15px;font-weight:500;padding:8px 12px;border-radius:99px}#links a:hover{color:var(--fg);background:var(--card)}
+
+
+
+.btn{display:inline-block;border:0;cursor:pointer;padding:14px 26px;border-radius:99px;font:600 15px var(--bf);text-decoration:none;color:var(--on);background:linear-gradient(100deg,var(--a),var(--b));transition:transform .2s,box-shadow .2s}
+.btn:hover{transform:translateY(-3px);box-shadow:0 14px 34px color-mix(in srgb,var(--a) 40%,transparent)}
+.btn.o{background:none;color:var(--fg);border:1px solid var(--line)}
+
+
+#bg{display:none}#burger{display:none;width:42px;height:42px;border-radius:12px;border:1px solid var(--line);background:var(--card);color:var(--fg);font-size:20px;cursor:pointer}
+section{padding:96px 0;position:relative}
+.eyebrow{font:600 13px var(--bf);letter-spacing:.14em;text-transform:uppercase;color:var(--a);margin-bottom:14px;display:block}
+h2{font-size:clamp(30px,4.6vw,52px)}.sub{color:var(--mut);margin-top:16px;max-width:62ch}
+.hero{min-height:100svh;display:flex;align-items:center;padding:130px 0 80px;overflow:hidden}
+.hero h1{font-size:clamp(42px,8vw,100px);max-width:13ch;font-weight:700;margin:22px 0}
+.grad{background:linear-gradient(100deg,var(--a),var(--b),var(--c));-webkit-background-clip:text;background-clip:text;color:transparent}
+
+.pill{display:inline-flex;gap:10px;align-items:center;padding:8px 16px;border:1px solid var(--line);border-radius:99px;background:var(--card);font-size:14px;color:var(--mut)}
+.pill i{width:8px;height:8px;border-radius:50%;background:var(--b);animation:pu 1.8s infinite}@keyframes pu{0%{box-shadow:0 0 0 0 var(--b)}100%{box-shadow:0 0 0 10px transparent}}
+.lead{font-size:20px;color:var(--mut);max-width:56ch}.now{margin-top:20px;font:500 17px var(--hf);color:var(--mut)}.now b{color:var(--a);border-right:2px solid var(--a);padding-right:4px}
+.cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:34px}
+.blob{position:absolute;border-radius:50%;filter:blur(90px);pointer-events:none;opacity:.5;animation:fl 16s ease-in-out infinite alternate}
+.b1{width:480px;height:480px;background:var(--a);top:-140px;right:-100px}.b2{width:380px;height:380px;background:var(--b);bottom:-120px;left:6%;animation-delay:-6s}.b3{width:280px;height:280px;background:var(--c);top:34%;right:30%;opacity:.3;animation-delay:-10s}
+@keyframes fl{to{transform:translate(60px,-50px) scale(1.2)}}
+
+
+
+.mq{overflow:hidden;border-block:1px solid var(--line);padding:20px 0}.mq div{display:flex;gap:44px;width:max-content;animation:mq 36s linear infinite}.mq span{font:700 22px var(--hf);color:var(--mut);white-space:nowrap}.mq span:nth-child(odd){color:var(--a)}@keyframes mq{to{transform:translateX(-50%)}}
+
+.grid{display:grid;gap:18px;margin-top:44px}.g3{grid-template-columns:repeat(auto-fit,minmax(min(100%,270px),1fr))}.g2{grid-template-columns:repeat(auto-fit,minmax(min(100%,330px),1fr))}.g4{grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr))}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:28px;backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur);transition:transform .3s,border-color .3s,box-shadow .3s;text-decoration:none;display:block;position:relative}
+.card:hover{transform:translateY(-6px);border-color:var(--a)}
+.card h3{font-size:21px;margin-bottom:8px}.card p,.card li{color:var(--mut);font-size:16px}.card ul{margin:10px 0 0;padding-left:20px}.card li{margin:6px 0}
+.card .go{display:inline-block;margin-top:14px;font-weight:600;font-size:15px;color:var(--a)}
+.ic{width:52px;height:52px;border-radius:16px;display:grid;place-items:center;background:linear-gradient(135deg,var(--a),var(--b));color:var(--on);font:700 18px var(--hf);margin-bottom:18px}
+.ic svg{width:25px;height:25px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.num{font:700 13px var(--hf);color:var(--a);letter-spacing:.1em;margin-bottom:12px;display:block}
+
+
+
+
+.alt{background:color-mix(in srgb,var(--a) 6%,var(--bg));border-block:1px solid var(--line)}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,150px),1fr));gap:24px;text-align:center}.stats b{display:block;font:700 clamp(46px,7vw,84px)/1 var(--hf)}.stats span{color:var(--mut);font-size:15px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start}
+.vv{margin-top:20px;padding-left:18px;border-left:3px solid var(--b)}.vv b{font-family:var(--hf)}.vv p{color:var(--mut)}
+.chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}.chips span{padding:9px 18px;border:1px solid var(--line);border-radius:99px;background:var(--card);font-size:15px;font-weight:500;transition:.2s}.chips span:hover{border-color:var(--a);color:var(--a);transform:translateY(-3px)}
+
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:14px;margin-top:36px}.facts div{padding:18px 20px;border:1px solid var(--line);border-radius:calc(var(--r)*.7);background:var(--card)}.facts small{display:block;color:var(--mut);font-size:13px}.facts b{font-family:var(--hf);font-size:17px}
+.av{width:58px;height:58px;border-radius:calc(var(--r)*.7);background:linear-gradient(135deg,var(--a),var(--c));color:#fff;display:grid;place-items:center;font:700 19px var(--hf);margin-bottom:16px}
+
+.k{color:var(--a);font-weight:600;font-size:15px}
+.band{text-align:center;background:linear-gradient(120deg,var(--a),var(--b));color:var(--on)}
+.band h2{max-width:20ch;margin:0 auto 28px}.band .btn{background:#fff;color:#13112b;border-radius:99px}
+form{display:grid;gap:14px}label{display:grid;gap:6px;font-size:14px;color:var(--mut)}
+input,textarea{font:inherit;color:var(--fg);background:var(--bg);border:1px solid var(--line);border-radius:calc(var(--r)*.6);padding:14px 16px;width:100%}input:focus,textarea:focus{outline:0;border-color:var(--a);box-shadow:0 0 0 4px color-mix(in srgb,var(--a) 20%,transparent)}textarea{min-height:130px;resize:vertical}
+#ok{display:none;padding:12px 14px;border-radius:12px;background:color-mix(in srgb,var(--a) 15%,transparent);font-size:15px}
+.info{display:grid;gap:12px}.info .card{padding:18px 24px}.info small{display:block;color:var(--mut);font-size:13px}.info a{font-weight:600;text-decoration:none}
+footer{border-top:1px solid var(--line);padding:56px 0 calc(28px + env(safe-area-inset-bottom,0px));color:var(--mut);font-size:15px}
+.fg{display:grid;grid-template-columns:1.4fr 1fr 1fr 1.2fr;gap:32px}footer h4{font:700 15px var(--hf);color:var(--fg);margin:0 0 12px}footer a{display:block;text-decoration:none;padding:3px 0}footer a:hover{color:var(--a)}
+.copy{margin-top:36px;padding-top:20px;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-size:14px}
+.rv{opacity:0;transform:translateY(26px);transition:opacity .8s,transform .8s cubic-bezier(.2,.8,.2,1)}.rv.in{opacity:1;transform:none}
+@media(max-width:940px){#links{display:none;position:fixed;top:calc(68px + env(safe-area-inset-top,0px));left:0;right:0;bottom:0;background:var(--bg);flex-direction:column;padding:20px 24px;overflow:auto}header.open #links{display:flex}#links a{font-size:19px}#burger{display:block}.nav>.btn{display:none}.two,.fg{grid-template-columns:1fr}.fg{grid-template-columns:1fr 1fr}section{padding:64px 0}}
+@media(max-width:520px){.logo{font-size:22px}.fg{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}html{scroll-behavior:auto}}
+
+html{background:var(--bg)}
+[data-m=dark]{--bg:color-mix(in srgb,var(--a) 9%,#04050c);--fg:#f4f5ff;--mut:#a3a9c8;--card:rgba(255,255,255,.05);--line:rgba(255,255,255,.13);--on:#050510;--nav:color-mix(in srgb,var(--bg) 70%,transparent);color-scheme:dark}
+[data-m=light]{--bg:#fbf7ee;--fg:#2a1d0e;--mut:#6b5a43;--card:#fffdf8;--line:color-mix(in srgb,#92650a 38%,transparent);--on:#fffdf8;--nav:color-mix(in srgb,var(--bg) 90%,transparent);color-scheme:light}
+[data-t=aurora]{--a:#8b93ff;--b:#22d3ee;--c:#f472b6;--r:22px;--hf:'Space Grotesk',sans-serif;--blur:blur(16px);--sh:none;--shh:0 24px 50px -20px var(--a);--bd:1px solid var(--line);--ir:16px;--br:99px;--bo:.5;--pat:none;--hs:clamp(42px,8vw,100px)}
+[data-t=aurora][data-m=light]{--a:#92650a;--b:#b45309;--c:#7c2d12;--r:3px;--hf:'Fraunces',Georgia,serif;--bf:'Fraunces',Georgia,serif;--blur:none;--sh:none;--shh:0 0 44px -10px var(--a);--bd:1px solid var(--line);--ir:0;--br:0;--bo:.22;--pat:radial-gradient(var(--line) 1.4px,transparent 1.8px);--ps:26px;--sep:"✦";--rt:translateY(18px) scale(.98);--rf:blur(5px);--cs:140px}
+.hero h1{font-size:var(--hs)}
+.card{background:var(--cbg,var(--card));border:var(--bd);box-shadow:var(--sh);overflow:hidden}.card:hover{box-shadow:var(--shh)}
+.card::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;opacity:0;transition:opacity .3s;background:radial-gradient(260px circle at var(--mx,50%) var(--my,50%),color-mix(in srgb,var(--a) 24%,transparent),transparent 70%)}.card:hover::after{opacity:1}
+.tl{transition:transform .12s ease-out,box-shadow .3s!important}
+.ic,.av{border-radius:var(--ir);transition:transform .4s}.card:hover .ic{transform:rotate(-8deg) scale(1.12)}
+.btn,.band .btn{border-radius:var(--br)}.btn.o{background:none;color:var(--fg);border:1px solid var(--line)}
+.hero::before{content:"";position:absolute;inset:0;background:var(--pat);background-size:var(--ps,40px) var(--ps,40px);opacity:.6;-webkit-mask-image:linear-gradient(#000,transparent 90%);mask-image:linear-gradient(#000,transparent 90%);pointer-events:none;animation:gp 5s linear infinite}
+@keyframes gp{to{background-position:var(--ps,0) var(--ps,0)}}
+.blob{opacity:var(--bo)!important;translate:0 calc(var(--sy,0)*-.2px)}
+.grad{background-image:linear-gradient(100deg,var(--a),var(--b),var(--c),var(--a));background-size:300% 100%;-webkit-background-clip:text;background-clip:text;color:transparent}
+.wd{display:inline-block;animation:wd 1s cubic-bezier(.2,.8,.2,1) both;animation-delay:calc(var(--i)*.09s + .2s)}
+.wd.grad{animation:wd 1s cubic-bezier(.2,.8,.2,1) calc(var(--i)*.09s + .2s) both,sh 8s linear infinite}
+@keyframes wd{from{opacity:0;transform:translateY(60%) rotate(4deg);filter:blur(8px)}}@keyframes sh{to{background-position:300% 0}}
+header{animation:dn .8s cubic-bezier(.2,.8,.2,1) both}@keyframes dn{from{transform:translateY(-100%)}}
+.mq:hover div{animation-play-state:paused}
+.grid>.rv:nth-child(3n+2){transition-delay:.1s}.grid>.rv:nth-child(3n+3){transition-delay:.2s}
+#pb{position:fixed;top:0;left:0;right:0;height:3px;z-index:50;background:linear-gradient(90deg,var(--a),var(--b),var(--c));transform:scaleX(0);transform-origin:0 0}
+#cur{position:fixed;left:0;top:0;width:420px;height:420px;border-radius:50%;pointer-events:none;z-index:2;opacity:.55;background:radial-gradient(circle,color-mix(in srgb,var(--a) 20%,transparent),transparent 65%);transform:translate3d(-999px,-999px,0)}
+@media(hover:none){#cur{display:none}}
+#md{width:42px;height:42px;border-radius:12px;border:1px solid var(--line);background:var(--card);color:var(--fg);font-size:18px;cursor:pointer;transition:transform .4s}#md:hover{transform:rotate(30deg)}
+#dk{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:40;display:flex;flex-direction:column;align-items:flex-end;gap:10px}
+#dkb{border:1px solid var(--line);background:var(--bg);color:var(--fg);padding:12px 18px;border-radius:99px;font:600 14px var(--bf);cursor:pointer;box-shadow:0 10px 30px -10px rgba(0,0,0,.45)}
+#dkp{display:none;width:min(360px,calc(100vw - 32px));background:var(--bg);border:1px solid var(--line);border-radius:22px;padding:16px;box-shadow:0 30px 60px -20px rgba(0,0,0,.55);max-height:72vh;overflow:auto}
+#dk.open #dkp{display:block;animation:pop .35s cubic-bezier(.2,.8,.2,1)}@keyframes pop{from{opacity:0;transform:translateY(14px) scale(.96)}}
+#dkp h4{margin:0 0 10px;font:600 12px var(--bf);letter-spacing:.12em;text-transform:uppercase;color:var(--mut)}
+.sg{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}
+.sg button{border:2px solid transparent;background:none;padding:5px 0;cursor:pointer;color:var(--mut);font:500 11px var(--bf);display:grid;gap:5px;justify-items:center;border-radius:12px}
+.sg button i{width:100%;max-width:44px;aspect-ratio:1;border-radius:50%;background:linear-gradient(135deg,var(--a),var(--b) 60%,var(--c));box-shadow:inset 0 0 0 1px rgba(255,255,255,.25)}
+.sg button[aria-pressed=true]{border-color:var(--fg);color:var(--fg)}
+.row{display:flex;gap:8px;align-items:center;margin-top:14px;font-size:13px;color:var(--mut);flex-wrap:wrap}
+.row input{flex:1;padding:0;border:0;background:none;accent-color:var(--a);min-width:0}
+.sm{border:1px solid var(--line);background:var(--card);color:var(--fg);border-radius:99px;padding:8px 14px;font:600 13px var(--bf);cursor:pointer}
+[data-mo=off] *,[data-mo=off] *::before,[data-mo=off] *::after{animation:none!important;transition:none!important}[data-mo=off] .rv{opacity:1;transform:none}[data-mo=off] #cur{display:none}
+
+.hero .w{z-index:1}
+.wd{animation-name:var(--wa,wd);animation-timing-function:var(--we,cubic-bezier(.2,.8,.2,1));--d:calc(var(--i)*.55 + 1);translate:calc(var(--px,0)*var(--d)*16px) calc(var(--py,0)*var(--d)*10px + var(--sy,0)*var(--d)*-.07px);transition:translate .3s ease-out}
+.wd.grad{animation-name:var(--wa,wd),sh;animation-timing-function:var(--we,cubic-bezier(.2,.8,.2,1)),linear}
+.hero .pill,.hero .lead,.hero .now,.hero .cta{translate:calc(var(--px,0)*-6px) calc(var(--sy,0)*.1px);transition:translate .3s ease-out}
+.hero::after{content:"AI · ML · AI · ML";position:absolute;left:0;bottom:-.12em;font:800 clamp(120px,24vw,340px)/1 var(--hf);white-space:nowrap;color:transparent;-webkit-text-stroke:1.5px var(--line);translate:calc(var(--sy,0)*-.4px + var(--px,0)*-50px) 0;pointer-events:none;opacity:.8;transition:translate .3s ease-out}
+@keyframes wA{from{opacity:0;transform:scale(1.7) translateY(-30px);filter:blur(10px)}}
+@keyframes wB{from{opacity:0;clip-path:inset(100% 0 0 0);transform:translateY(50%)}to{clip-path:inset(0)}}
+@keyframes wC{from{opacity:0;transform:translateX(-70px) skewX(-22deg);filter:blur(6px)}}
+@keyframes wD{from{opacity:0;letter-spacing:.45em;filter:blur(8px)}}
+@keyframes wE{from{opacity:0;transform:translateY(-140%) rotate(-18deg)}}
+@keyframes wF{from{opacity:0;transform:perspective(500px) rotateX(95deg);transform-origin:50% 100%}}
+@keyframes wG{0%{opacity:0;transform:translateX(-14px) skewX(30deg)}25%{opacity:1;transform:translateX(10px);text-shadow:4px 0 var(--c),-4px 0 var(--b)}50%{transform:translateX(-6px) skewX(-12deg);text-shadow:-3px 0 var(--c),3px 0 var(--b)}75%{transform:translateX(3px)}100%{text-shadow:none}}
+@keyframes wH{from{clip-path:inset(0 100% 0 0)}to{clip-path:inset(0)}}
+@keyframes wI{from{opacity:0;transform:translateY(45%) scale(.8);filter:blur(12px) brightness(4)}}
+
+::selection{background:var(--a);color:var(--on)}html{scrollbar-color:var(--a) var(--bg)}h1,h2,h3{text-wrap:balance}p,li{text-wrap:pretty}
+.nav{transition:height .3s}header.sc{box-shadow:0 12px 30px -20px rgba(0,0,0,.6)}header.sc .nav{height:58px}
+.rv{transform:var(--rt,translateY(26px));filter:var(--rf,none);transition:opacity .8s,transform .8s var(--re,cubic-bezier(.2,.8,.2,1)),filter .8s}.rv.in{filter:none}
+.card.rv{transition:opacity .8s,filter .8s,transform .8s var(--re,cubic-bezier(.2,.8,.2,1)),border-color .3s,box-shadow .3s}.card.rv.dn{transition:transform .3s,border-color .3s,box-shadow .3s;transition-delay:0s!important}
+.btn:not(.o){overflow:hidden}.btn:not(.o)::after{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 30%,rgba(255,255,255,.5) 50%,transparent 70%);translate:-120% 0;transition:translate .6s}.btn:not(.o):hover::after{translate:120% 0}
+.mq span::after{content:var(--sep,"•");margin-left:44px;color:var(--a);opacity:.5}
+#cur{width:var(--cs,420px);height:var(--cs,420px);margin:calc(210px - var(--cs,420px)/2)}
+/* per-look typography */
+/* per-look reveal */
+/* headers */
+[data-t=aurora] header{inset:calc(10px + env(safe-area-inset-top,0px)) 14px auto;padding-top:0;max-width:1180px;margin-inline:auto;border:1px solid var(--line);border-radius:99px}
+/* section headings */
+/* cards */
+/* backgrounds */
+body::before,body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:60}
+/* marquee, stats, band, buttons, cursor */
+
+/* ---- responsive fixes ---- */
+.w{padding:0 clamp(16px,4vw,24px)}
+img,canvas,svg{max-width:100%}
+.card h3,.card p,.card li,.info a,footer a{overflow-wrap:anywhere}
+@media(max-width:940px){
+[data-t=aurora] header{inset:calc(8px + env(safe-area-inset-top,0px)) 8px auto;border-radius:22px}
+.nav{height:60px}
+#links{position:absolute!important;top:calc(100% + 8px)!important;left:0;right:0;bottom:auto!important;max-height:calc(100svh - 100px);background:var(--bg);border:1px solid var(--line);border-radius:20px;padding:10px 14px!important;box-shadow:0 30px 60px -20px rgba(0,0,0,.5)}
+#links a{padding:14px 12px;border-bottom:1px solid var(--line);border-radius:0}#links a:last-child{border:0}
+.hero{padding:110px 0 64px}
+.hero::after{font-size:clamp(90px,26vw,220px)}}
+@media(max-width:520px){.cta .btn{flex:1 1 100%;text-align:center}.copy{flex-direction:column}.blob{filter:blur(70px)}.stats b{font-size:clamp(40px,14vw,60px)}}
+@media(min-width:1600px){.w{max-width:1360px}body{font-size:18px}}
+/* ---- voice intro ---- */
+#sp{position:fixed;inset:0;z-index:100;display:grid;place-items:center;padding:20px;background:color-mix(in srgb,var(--bg) 86%,transparent);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}#sp[hidden]{display:none}
+.sb{max-width:460px;width:100%;text-align:center;background:var(--bg);border:1px solid var(--line);border-radius:var(--r);padding:clamp(24px,5vw,40px);box-shadow:0 40px 80px -30px rgba(0,0,0,.55)}
+.sb .logo{font-size:42px;display:block;margin:0 0 10px}.sb p{color:var(--mut);margin-bottom:22px}.sb .cta{justify-content:center;margin:0}
+#vb{position:fixed;right:max(14px,env(safe-area-inset-right,0px));bottom:max(14px,env(safe-area-inset-bottom,0px));z-index:40;border:1px solid var(--line);background:var(--bg);color:var(--fg);padding:11px 16px;border-radius:99px;font:600 14px var(--bf);cursor:pointer;box-shadow:0 10px 30px -10px rgba(0,0,0,.45)}#vb.on{border-color:var(--a)}
+/* ---- small-screen fixes ---- */
+.hero>.w{width:100%}
+#links{scrollbar-width:thin}#links::-webkit-scrollbar-button{display:none}
+@media(max-width:940px){#links{max-height:calc(100dvh - 92px)}}
+@media(max-width:940px) and (max-height:520px){header.open #links{display:grid;grid-template-columns:1fr 1fr;gap:0 10px}#links a{padding:10px;font-size:16px}}
+/* ---- light mode: full Royal look (hero keeps Aurora animations) ---- */
+[data-m=light][data-t=aurora] header{inset:0 0 auto;max-width:none;margin:0;border:0;border-bottom:1px solid var(--a);border-radius:0;padding-top:env(safe-area-inset-top,0px)}
+[data-m=light] #links a{text-transform:uppercase;letter-spacing:.18em;font-size:12.5px}
+[data-m=light] .hero{background:radial-gradient(700px 420px at 50% 40%,color-mix(in srgb,var(--a) 14%,transparent),transparent)}
+[data-m=light] .hero .w{text-align:center}
+[data-m=light] .hero h1,[data-m=light] .hero .lead{margin-inline:auto}
+[data-m=light] .hero .cta{justify-content:center}
+[data-m=light] section>.w:not(.two)>.rv:first-child{text-align:center}
+[data-m=light] section>.w:not(.two)>.rv:first-child .sub{margin-inline:auto}
+[data-m=light] section>.w:not(.two)>.rv:first-child h2::after{content:"\25C6  \25C6  \25C6";display:block;color:var(--a);font-size:12px;letter-spacing:.4em;margin-top:16px}
+[data-m=light] section+section{border-top:1px solid var(--line)}
+[data-m=light] .card{outline:1px solid var(--line);outline-offset:-9px}
+[data-m=light] .btn:not(.o){background:none;color:var(--a);border:1px solid var(--a);text-transform:uppercase;letter-spacing:.16em;font-size:13px}
+[data-m=light] .btn:not(.o):hover{background:var(--a);color:var(--on);box-shadow:none}
+[data-m=light] .btn.o{border-color:var(--a);color:var(--a)}
+[data-m=light] .band .btn:not(.o){background:#fffdf8;color:#2a1d0e;border-color:#fffdf8}
+[data-m=light] .band .btn:not(.o):hover{background:#2a1d0e;color:#fffdf8;border-color:#2a1d0e}
+[data-m=light] .pill,[data-m=light] .chips span{border-radius:0}
+[data-m=light] .mq span{font-style:italic;font-weight:400}
+[data-m=light] .stats b{color:transparent;-webkit-text-stroke:2px var(--a)}
+[data-m=light] .hero .now b{border-color:var(--a)}
+[data-m=light] body::before{background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='.8' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E");opacity:.07}
+@media(max-width:940px){[data-m=light] #links a{font-size:15px;letter-spacing:.14em}[data-m=light] #links{border-radius:0}}
+/* ---- light mode: refined Royal hero ---- */
+[data-m=light] .hero{background:radial-gradient(900px 520px at 50% 38%,rgba(229,185,79,.30),transparent 70%),linear-gradient(180deg,#fbf7ee 0%,#f3e8cc 100%)}
+[data-m=light] .hero .b1,[data-m=light] .hero .b2{display:none}
+[data-m=light] .hero .b3{display:block;position:absolute;inset:84px 18px 18px 18px;width:auto;height:auto;border-radius:0;background:none;filter:none;animation:none;translate:none;opacity:1!important;border:1px solid var(--a);outline:1px solid var(--line);outline-offset:6px;pointer-events:none}
+[data-m=light] .hero::before{opacity:.3}
+[data-m=light] .hero::after{opacity:.45}
+[data-m=light] .hero .w{padding-inline:clamp(30px,7vw,70px)}
+[data-m=light] .hero .pill{background:transparent;border-color:var(--a);color:var(--a);text-transform:uppercase;letter-spacing:.2em;font-size:12px}
+[data-m=light] .hero .pill i{background:var(--a)}
+[data-m=light] .hero h1{font-weight:600;letter-spacing:-.03em;max-width:14ch}
+[data-m=light] .hero .lead{color:var(--fg);opacity:.8}
+[data-m=light] .hero .now{font-style:italic}
+@media(max-width:940px){[data-m=light] .hero .b3{inset:76px 10px 10px 10px;outline-offset:4px}[data-m=light] .hero .w{padding-inline:clamp(24px,6vw,40px)}}
+/* ---- contact form alignment ---- */
+form.card{display:grid;gap:18px;align-content:start}
+form.card h3{margin-bottom:2px}
+form.card label{gap:8px}
+form.card .btn{width:100%;margin-top:6px;justify-self:stretch}
+form.card textarea{display:block}
+/* ---- light hero: no squares ---- */
+[data-m=light] .hero .b3{display:none}
+[data-m=light] .hero::before{opacity:0}
+[data-m=light] .hero .w{padding-inline:clamp(16px,4vw,24px)}
+[data-m=light] .hero .pill{border-radius:99px;letter-spacing:.14em}
+[data-m=light] .hero .btn{border-radius:99px}
+[data-m=light] .hero .btn:not(.o){background:linear-gradient(100deg,var(--a),var(--b));color:#fffdf8;border:0;padding:15px 30px;letter-spacing:.12em}
+[data-m=light] .hero .btn:not(.o):hover{background:linear-gradient(100deg,var(--b),var(--c));color:#fffdf8;box-shadow:0 14px 30px -14px var(--a)}
+[data-m=light] .hero .btn.o{border:1px solid var(--a);color:var(--a);padding:15px 30px}
+</style>
+</head>
+<body><div id="pb"></div><div id="cur"></div>
+<header id="hd"><div class="w nav">
+<a class="logo" href="#home">i<i>.</i>k<i>.</i>val</a>
+<nav id="links" aria-label="Main"><a href="#industries">Industries</a><a href="#products">Products</a><a href="#capabilities">Capabilities</a><a href="#about">About</a><a href="#team">Team</a><a href="#careers">Careers</a><a href="#contact">Contact</a></nav>
+<button id="md" aria-label="Toggle light or dark mode">☀</button>
+<a class="btn" href="#contact">Contact for Demo</a>
+<button id="burger" aria-label="Menu" aria-expanded="false">☰</button>
+</div></header>
+
+<main id="app"></main>
+
+<footer><div class="w"><div class="fg">
+<div><a class="logo" href="#home" style="font-size:24px">i<i>.</i>k<i>.</i>val</a><p style="margin-top:10px;max-width:30ch">Reifying Artificial Intelligence, Machine Learning</p></div>
+<div><h4>Capabilities</h4><a href="#capabilities">AI Vision</a><a href="#capabilities">Conversational AI</a><a href="#capabilities">NLP</a><a href="#capabilities">Predictive Analytics</a><a href="#capabilities">Server Log Analytics</a><a href="#capabilities">ERP</a></div>
+<div><h4>Industries</h4><a href="#industries">Business</a><a href="#industries">Healthcare</a><a href="#industries">Manufacturing</a><a href="#industries">Legal</a><h4 style="margin-top:16px">The Company</h4><a href="#about">About</a><a href="#careers">Careers</a><a href="#contact">Contact</a></div>
+<div><h4>Contact</h4><p>Coimbatore, Tamil Nadu, India</p><a href="tel:+919994431636">+919994431636</a><a href="mailto:arun@ikval.com">arun@ikval.com</a><a href="https://www.linkedin.com/company/ikval-softwares-llp/" rel="noopener">LinkedIn</a><a href="https://www.facebook.com/p/ikval-softwares-LLP-100068895709120/" rel="noopener">Facebook</a></div>
+</div><div class="copy"><span>D &amp; D by I.K.VAL Softwares LLP</span><a href="#home">Scroll to Top</a></div></div></footer>
+
+<div id="sp" role="dialog" aria-modal="true" aria-labelledby="spt" hidden><div class="sb"><a class="logo" href="#home" onclick="return false">i<i>.</i>k<i>.</i>val</a><h2 id="spt" style="font-size:24px;margin-bottom:10px">Welcome</h2><p>Listen to a short spoken introduction to our company and work, or continue without sound.</p><div class="cta"><button class="btn" id="spy">🔊 Listen to intro</button><button class="btn o" id="spn">Continue silently</button></div></div></div>
+<button id="vb" aria-pressed="false">🔇 Voice off</button>
+<script>
+(function(){
+var $=function(s){return document.querySelector(s)},app=$('#app');
+var IC={eye:'<path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/>',chat:'<path d="M21 12a8 8 0 0 1-11.5 7.2L3 21l1.8-6.2A8 8 0 1 1 21 12z"/>',text:'<path d="M4 6h16M4 12h10M4 18h16"/>',chart:'<path d="M3 20h18M6 16V10M11 16V5M16 16v-7M21 16V8"/>',log:'<rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 9l3 3-3 3M13 15h4"/>',erp:'<circle cx="6" cy="6" r="2.5"/><circle cx="18" cy="6" r="2.5"/><circle cx="12" cy="18" r="2.5"/><path d="M8 7l3 9M16 7l-3 9M8.5 6h7"/>',biz:'<rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2M3 13h18"/>',heart:'<path d="M20.8 5.6a5 5 0 0 0-7.1 0L12 7.3l-1.7-1.7a5 5 0 0 0-7.1 7.1L12 21.5l8.8-8.8a5 5 0 0 0 0-7.1z"/>',fac:'<path d="M3 21V10l6 4V10l6 4V6h6v15z"/>',scale:'<path d="M12 3v18M5 21h14M4 8h16M7 8l-3 7a3 3 0 0 0 6 0zM17 8l-3 7a3 3 0 0 0 6 0z"/>'};
+var ic=function(k){return '<i class="ic"><svg viewBox="0 0 24 24">'+IC[k]+'</svg></i>'};
+var ul=function(a){return '<ul>'+a.map(function(x){return '<li>'+x+'</li>'}).join('')+'</ul>'};
+var chips=function(a){return '<div class="chips">'+a.map(function(x){return '<span>'+x+'</span>'}).join('')+'</div>'};
+var prods=[['Danta','Health Diagnostics'],['DataXtract','Document Extraction – Invoices'],['IntelliDoc','Credit Cards/Medical/Bills'],['StokBot','Stock Market Prediction'],['EMIOpt','EMI Collection Optimization'],['ProEye','Product Inspection'],['StayChat','Hotel Booking/Cancellation'],['iBake','Just-in-Time Restocking'],['Restaurant Review','Recommender System'],['Employee','Leave Prediction']];
+var caps=[['AI Vision','eye',['Image recognition','Computer Vision','Image Identification in Government documents']],['Conversational AI','chat',['AI based Chatbots']],['NLP','text',['Natural Language Processing','Natural Language Processing in Childcare reports']],['Predictive Analytics','chart',['Prediction']],['Server Log Analytics','log',[]],['ERP','erp',[]]];
+var inds=[['Business','biz',['Intelligent Information retrieval in Banking']],['Healthcare','heart',['Danta – Health Diagnostics','IntelliDoc – Credit Cards/Medical/Bills','Automation test scripts in Selenium for testing web based Health reporting applications']],['Manufacturing','fac',[]],['Legal','scale',[]]];
+var team=[['AB','Arunkumar Balakrishnan','Director &amp; Co-Founder',['PhD in Machine Learning, 30+ years experience in AI &amp; ML','Senior Consultant with a multi-national real time software development firm','Managed international software development and testing projects with clients in USA and Switzerland','Eclectic, believes people make the difference, passionate about Artificial Intelligence, enjoys teaching and playing badminton']],['SP','Sapna PG','Director &amp; Co-Founder',['Ph.D. in Software Testing, experience in teaching and developing software','Multi-faceted, scientific, artistic, nature lover','Amicable and a stickler for perfection']],['MA','Manasi Arora','Software Architect',['20+ years experience in Software Design and Development','Understands requirements perfectly and designs simple solutions','Ensures clean implementation']]];
+var head=function(e,t,s){return '<div class="rv"><span class="eyebrow">'+e+'</span><h2>'+t+'</h2>'+(s?'<p class="sub">'+s+'</p>':'')+'</div>'};
+var detail=function(a,i){return '<div class="grid g3">'+a.map(function(c,n){return '<div class="card rv">'+ic(c[1])+'<h3>'+c[0]+'</h3>'+(c[2].length?ul(c[2]):'<p>Talk to us about '+c[0]+'.</p>')+'<a class="go" href="#contact">Contact for Demo →</a></div>'}).join('')+'</div>'};
+var band='<section class="band"><div class="w rv"><h2>Unlock the power of AI for your enterprise</h2><a class="btn" href="#contact">Contact for Demo</a></div></section>';
+var story='The journey with AI and ML started in 1994. Our primary focus is on applying Machine Learning techniques to challenging problems and finding innovative solutions.';
+var story2='Today, we work with latest technology and confront challenging problems equipped with skills in AIML and a never give up attitude.';
+app.innerHTML=
+'<section class="hero" id="home"><canvas id="net" aria-hidden="true" style="position:absolute;inset:0;width:100%;height:100%"></canvas><i class="blob b1"></i><i class="blob b2"></i><i class="blob b3"></i><div class="w" style="position:relative"><span class="pill"><i></i>Machine learning research since 1994</span>'
++'<h1><span class="wd" style="--i:0">Reifying</span> <span class="wd grad" style="--i:1">Artificial</span> <span class="wd grad" style="--i:2">Intelligence,</span> <span class="wd" style="--i:3">Machine</span> <span class="wd" style="--i:4">Learning</span></h1><p class="lead">Experience the power of AI &amp; ML solutions built to deliver world class software and customer experiences.</p>'
++'<div class="now">Specialists in <b id="rot">Machine Learning</b></div><div class="cta"><a class="btn" href="#contact">Contact for Demo</a><a class="btn o" href="#capabilities">Capabilities</a></div></div></section>'
++'<div class="mq" aria-hidden="true"><div>'+prods.concat(prods).map(function(p){return '<span>'+p[0]+'</span>'}).join('')+'</div></div>'
++'<section class="alt" id="industries"><div class="w">'+head('Industries','Industries we serve')+detail(inds)+'</div></section>'
++'<section id="products"><div class="w">'+head('Products','Our AI &amp; ML products')+'<div class="grid g3">'+prods.map(function(p,i){return '<a class="card rv" href="#contact"><span class="num">'+('0'+(i+1)).slice(-2)+'</span><h3>'+p[0]+'</h3><p>'+p[1]+'</p><span class="go">Ask for a demo →</span></a>'}).join('')+'</div></div></section>'
++'<section class="alt" id="capabilities"><div class="w">'+head('Capabilities','What we build')+detail(caps)+'</div></section>'
++'<section><div class="w"><div class="stats rv"><div><b data-n="1994">1994</b><span>ML journey began</span></div><div><b data-n="2016">2016</b><span>ikval softwares LLP founded</span></div><div><b data-n="10">10</b><span>AI &amp; ML products</span></div><div><b data-n="4">4</b><span>Industries</span></div></div></div></section>'
++'<section id="about"><div class="w"><div class="two"><div class="rv"><span class="eyebrow">About</span><h2>We build software that makes this world a better place</h2><p class="sub">ikval softwares LLP applies Machine Learning techniques to challenging problems, to find innovative solutions. Research in Machine Learning started in 1994.</p><div class="vv"><b>Vision</b><p>We build software that makes this world a better place.</p></div><div class="vv"><b>Values</b><p>Emphasis on quality, belief in continuous learning and an attitude of doing better.</p></div><h3 style="margin-top:38px">Our Story</h3><p class="sub">'+story+'</p><p class="sub">'+story2+'</p></div>'
++'<div class="rv"><h3 style="font-size:28px">Our Approach</h3><p class="sub">Adding value to our customers by</p><div class="card" style="margin-top:16px"><ul style="margin:0"><li>Aiding in their Digitalization and Automation activities by designing and developing AI ML solutions and modules that can be plugged in and seamlessly integrated with existing software.</li><li>Consult, Explore, Design, Develop and Implement AI ML solutions for end user clients and/or suggest ways and means to improve processes and outcomes.</li></ul></div><p class="sub">A second focus is “Software Quality” and “Software Testing”. We also use best practices from Product Lifecycle Management.</p></div></div></div></section>'
++'<section class="alt"><div class="w">'+head('Machine Learning','Research &amp; expertise')+'<div class="grid g2"><div class="card rv"><h3>Work areas</h3>'+ul(['Image Identification in Government documents','Natural Language Processing in Childcare reports','Intelligent Information retrieval in Banking','Keystroke dynamics'])+'</div><div class="card rv"><h3>Prior experience in building</h3>'+ul(['Integrated machine learning system','Machine learning application to build models of students'])+'</div></div><h3 class="rv" style="margin-top:44px">Platforms</h3><div class="rv">'+chips(['DL4J','Python','TensorFlow – Keras','Java – Machine learning library','WEKA','JMetal','Hadoop','Spark'])+'</div><h3 class="rv" style="margin-top:34px">Technologies</h3><div class="rv">'+chips(['Deep Learning','Bayesian networks','Inductive Decision Trees','Classification','Regression','Prediction','Association rule mining'])+'</div></div></section>'
++'<section><div class="w">'+head('Quality','Software Testing')+'<div class="grid g2"><div class="card rv"><h3>What we do</h3>'+ul(['Automation test scripts in Selenium for testing web based Health reporting applications','Integrate TestNG, ExtendReports with Selenium scripts'])+'</div><div class="card rv"><h3>Prior experience in</h3>'+ul(['Designing, developing Automated Testing tool for Real time systems (PERL, interfacing with eVC++)','Designing, developing test management systems to ensure test coverage, test prioritization efficiently'])+'</div></div>'
++'<div class="facts rv"><div><small>Industry</small><b>Software Development</b></div><div><small>Founded</small><b>2016</b></div><div><small>Type</small><b>Partnership</b></div><div><small>Company size</small><b>2-10 employees</b></div><div><small>Headquarters</small><b>Coimbatore, Tamil Nadu</b></div></div><p class="sub rv">Specialties: Machine Learning, Deep Learning, Automated Software Testing, Image recognition, Natural Language Processing, AI based Chatbots, Customer modelling, Computer Vision.</p></div></section>'
++'<section class="alt" id="team"><div class="w">'+head('Team','Meet the Team')+'<div class="grid g3">'+team.map(function(m){return '<div class="card rv"><div class="av">'+m[0]+'</div><h3>'+m[1]+'</h3><span class="k">'+m[2]+'</span>'+ul(m[3])+'</div>'}).join('')+'</div></div></section>'
++'<section id="careers"><div class="w">'+head('Careers','Join us')+'<div class="grid g2"><div class="card rv"><h3>Values</h3>'+ul(['Emphasis on quality','Belief in continuous learning','An attitude of doing better'])+'</div><div class="card rv"><h3>Contact us</h3><p>Coimbatore, Tamil Nadu, India</p><p><a href="tel:+919994431636" class="k">+919994431636</a></p><p><a href="mailto:arun@ikval.com" class="k">arun@ikval.com</a></p><a class="btn" style="margin-top:18px" href="mailto:arun@ikval.com?subject=Careers">Email us</a></div></div></div></section>'
++band
++'<section id="contact"><div class="w two"><div class="rv"><span class="eyebrow">Contact</span><h2 style="margin-bottom:28px">Let’s talk</h2><div class="info"><div class="card"><small>Location</small>Coimbatore, Tamil Nadu, India</div><div class="card"><small>Regd Address</small>Ondipudur, Coimbatore, Tamil Nadu 641016</div><div class="card"><small>Phone</small><a href="tel:+919994431636">+919994431636</a></div><div class="card"><small>Email</small><a href="mailto:arun@ikval.com">arun@ikval.com</a></div><div class="card"><small>Website</small>www.ikval.com</div><div class="card"><small>Connect with us</small><a href="https://www.linkedin.com/company/ikval-softwares-llp/" rel="noopener">LinkedIn</a> &nbsp;·&nbsp; <a href="https://www.facebook.com/p/ikval-softwares-LLP-100068895709120/" rel="noopener">Facebook</a></div></div></div>'
++'<form class="card rv" id="f" action="mailto:arun@ikval.com" method="post" enctype="text/plain"><h3>Contact for Demo</h3><label>Name<input name="name" required autocomplete="name"></label><label>Email<input name="email" type="email" required autocomplete="email"></label><label>Message<textarea name="message" required></textarea></label><button class="btn" type="submit">Send message</button><div id="ok" role="status">Your email app should open with the message ready to send.</div></form></div></section>';
+
+/* reveal + counters */
+var io=new IntersectionObserver(function(es){es.forEach(function(e){if(!e.isIntersecting)return;var tg=e.target;tg.classList.add('in');setTimeout(function(){tg.classList.add('dn')},1300);e.target.querySelectorAll('[data-n]').forEach(function(el){var n=+el.dataset.n,f=n>1000?1900:0,t0=null;(function s(t){t0=t0||t;var p=Math.min(1,(t-t0)/1500);el.textContent=Math.round(f+(n-f)*(1-Math.pow(1-p,3)));if(p<1)requestAnimationFrame(s)})(performance.now())});io.unobserve(e.target)})},{threshold:.12});
+document.querySelectorAll('.rv').forEach(function(e){io.observe(e)});
+/* rotating words */
+var W=['Machine Learning','Deep Learning','Computer Vision','Natural Language Processing','AI based Chatbots','Customer modelling','Automated Software Testing'],wi=0;
+setInterval(function(){wi=(wi+1)%W.length;scr(W[wi])},2200);
+
+var H=document.documentElement,S={m:'dark'};
+try{var q=JSON.parse(localStorage.getItem('ikval-look')||'{}');if(q.m==='light'||q.m==='dark')S.m=q.m}catch(e){}
+function ap(){H.dataset.t='aurora';H.dataset.m=S.m;$('#md').textContent=S.m==='dark'?'☀':'☾';if(typeof CW==='number')ini();try{localStorage.setItem('ikval-look',JSON.stringify(S))}catch(e){}}
+function tm(){var f=function(){S.m=S.m==='dark'?'light':'dark';ap()};document.startViewTransition?document.startViewTransition(f):f()}
+ap();$('#md').addEventListener('click',tm);
+document.addEventListener('keydown',function(e){if(/INPUT|TEXTAREA/.test(e.target.tagName)||e.metaKey||e.ctrlKey)return;if(e.key==='d')tm()});
+/* effects */
+var cur=$('#cur');
+document.addEventListener('pointermove',function(e){cur.style.transform='translate3d('+(e.clientX-210)+'px,'+(e.clientY-210)+'px,0)';
+var c=e.target.closest&&e.target.closest('.card'),b=e.target.closest&&e.target.closest('.btn');
+if(c){var r=c.getBoundingClientRect(),x=e.clientX-r.left,y=e.clientY-r.top;c.style.setProperty('--mx',x+'px');c.style.setProperty('--my',y+'px');
+if(e.pointerType==='mouse'&&c.id!=='f'){c.classList.add('tl');c.style.transform='perspective(800px) rotateX('+((.5-y/r.height)*8)+'deg) rotateY('+((x/r.width-.5)*10)+'deg) translateY(-6px)'}}
+if(b&&e.pointerType==='mouse'){var k=b.getBoundingClientRect();b.style.transform='translate('+((e.clientX-k.left-k.width/2)*.2)+'px,'+((e.clientY-k.top-k.height/2)*.3)+'px)'}});
+document.addEventListener('pointerout',function(e){var c=e.target.closest&&e.target.closest('.card,.btn');if(c&&!c.contains(e.relatedTarget)){c.style.transform='';c.classList.remove('tl')}});
+addEventListener('scroll',function(){$('#pb').style.transform='scaleX('+(scrollY/((H.scrollHeight-innerHeight)||1))+')';H.style.setProperty('--sy',scrollY)},{passive:true});
+addEventListener('scroll',function(){$('#hd').classList.toggle('sc',scrollY>40)},{passive:true});
+/* hero scenes */
+var cv=$('#net'),cx=cv.getContext('2d'),CW,CH,P=[],ms={x:-999,y:-999},vis=1,A='#888',B='#888',C='#888',fr=0,D={},hr=cv.parentNode;
+function ini(){var t=H.dataset.m==='light'?'royal':'aurora',n={aurora:Math.min(100,CW*CH/14000|0),sunset:22,royal:130,candy:13,lava:70,cyber:Math.ceil(CW/16)}[t]||0;P=[];for(var i=0;i<n;i++)P.push({x:t==='cyber'?i*16:Math.random()*CW,y:Math.random()*CH,vx:Math.random()-.5,vy:t==='cyber'?Math.random()*2:Math.random()-.5,r:Math.random(),z:Math.random()})}
+function rs(){var d=devicePixelRatio||1;CW=cv.clientWidth;CH=cv.clientHeight;cv.width=CW*d;cv.height=CH*d;cx.setTransform(d,0,0,d,0,0);ini()}
+var dot=function(x,y,r,c,a){cx.globalAlpha=a;cx.fillStyle=c;cx.beginPath();cx.arc(x,y,r,0,6.283);cx.fill()};
+D.aurora=function(){for(var i=0;i<P.length;i++){var p=P[i],dx=ms.x-p.x,dy=ms.y-p.y,d=Math.sqrt(dx*dx+dy*dy);p.x+=p.vx*.6;p.y+=p.vy*.6;if(p.x<0||p.x>CW)p.vx*=-1;if(p.y<0||p.y>CH)p.vy*=-1;if(d<200&&d>1){p.x+=dx/d*.8;p.y+=dy/d*.8}for(var j=i+1;j<P.length;j++){var o=P[j],e=Math.hypot(p.x-o.x,p.y-o.y);if(e<130){cx.globalAlpha=(1-e/130)*.4;cx.strokeStyle=A;cx.beginPath();cx.moveTo(p.x,p.y);cx.lineTo(o.x,o.y);cx.stroke()}}dot(p.x,p.y,i%5?2:3.2,i%5?A:B,.85)}};
+D.sunset=function(){P.forEach(function(p,i){p.y-=.25+p.z*.7;p.x+=Math.sin(p.r*9+p.y/60)*.4;if(p.y<-120){p.y=CH+120;p.x=Math.random()*CW}dot(p.x,p.y,14+p.r*70,[A,B,C][i%3],.1+p.z*.14)})};
+D.emerald=function(T){cx.lineWidth=2;cx.lineCap='round';for(var i=0,n=Math.ceil(CW/26);i<n;i++){var x=i*26+13,h=70+(Math.sin(i*12.9898)*.5+.5)*CH*.5,w=Math.sin(T*.9+i*.5)*22+(ms.x>0?(ms.x-x)*.04:0);cx.globalAlpha=.55;cx.strokeStyle=i%3?A:B;cx.beginPath();cx.moveTo(x,CH);cx.quadraticCurveTo(x,CH-h*.5,x+w,CH-h);cx.stroke();dot(x+w,CH-h,3.5,C,.9)}};
+D.ocean=function(T){for(var k=0;k<4;k++){cx.globalAlpha=.12+k*.05;cx.fillStyle=k%2?A:B;cx.beginPath();cx.moveTo(0,CH);for(var x=0;x<=CW;x+=10)cx.lineTo(x,CH*(.6+.08*k)+Math.sin(x/(150-k*25)+T*(.8+k*.3))*(28-k*5)+(ms.y>0?(ms.y-CH*.6)*.05:0));cx.lineTo(CW,CH);cx.fill()}};
+D.royal=function(T){P.forEach(function(p){p.y-=.05+p.z*.1;if(p.y<0)p.y=CH;dot(p.x,p.y,.8+p.z*2.4,p.z>.8?C:A,.25+.75*Math.abs(Math.sin(T*(.6+p.r)+p.z*9)))})};
+D.candy=function(){P.forEach(function(p,i){p.vy+=.18;p.y+=p.vy;p.x+=p.vx*1.4;var r=16+p.r*34;if(p.x<-r)p.x=CW+r;if(p.x>CW+r)p.x=-r;if(p.y>CH-r){p.y=CH-r;p.vy=-(Math.abs(p.vy)>2?Math.abs(p.vy)*.88:9+Math.random()*7)}dot(p.x,p.y,r,[A,B,C][i%3],.8)})};
+D.mono=function(T){cx.lineWidth=1.5;cx.strokeStyle=A;for(var k=0;k<9;k++){var s=70+k*46;cx.globalAlpha=.55-k*.05;cx.save();cx.translate(CW*.7,CH*.5);cx.rotate(T*.25+k*.14);cx.strokeRect(-s/2,-s/2,s,s);cx.restore()}cx.globalAlpha=.18;cx.fillStyle=A;cx.fillRect(0,(T*130)%CH,CW,2)};
+D.cyber=function(){cx.font='15px monospace';var ch='01<>/{}ｱｲｳｴｶｷ';P.forEach(function(p){p.y+=p.vy*2.5+1.5;if(p.y>CH+160){p.y=-20;p.vy=Math.random()*2}for(var k=0;k<9;k++){cx.globalAlpha=(1-k/9)*.8;cx.fillStyle=k?A:B;cx.fillText(ch[Math.random()*ch.length|0],p.x,p.y-k*16)}})};
+D.paper=function(){if(fr%70===0)P.push({x:ms.x>0?ms.x:Math.random()*CW,y:ms.x>0?ms.y:Math.random()*CH,r:0});cx.lineWidth=1.5;cx.strokeStyle=A;P=P.filter(function(p){p.r+=1.6;cx.globalAlpha=Math.max(0,.7-p.r/340);cx.beginPath();cx.arc(p.x,p.y,p.r,0,6.283);cx.stroke();return p.r<340})};
+D.lava=function(T){P.forEach(function(p,i){p.y-=.6+p.z*2;p.x+=Math.sin(T*2+p.r*9)*.7;if(p.y<-10){p.y=CH+10;p.x=Math.random()*CW}cx.shadowBlur=14;cx.shadowColor=A;dot(p.x,p.y,1+p.z*3.4,[A,B,C][i%3],Math.min(1,p.y/CH*1.6+.15))});cx.shadowBlur=0};
+function dr(){requestAnimationFrame(dr);if(!vis||H.dataset.mo==='off')return;if(fr++%20===0){var cs=getComputedStyle(hr);A=cs.getPropertyValue('--a').trim();B=cs.getPropertyValue('--b').trim();C=cs.getPropertyValue('--c').trim()}cx.clearRect(0,0,CW,CH);(D[H.dataset.m==='light'?'royal':'aurora'])(performance.now()/1000);cx.globalAlpha=1}
+rs();dr();addEventListener('resize',rs);
+hr.addEventListener('pointermove',function(e){var r=cv.getBoundingClientRect();ms.x=e.clientX-r.left;ms.y=e.clientY-r.top;hr.style.setProperty('--px',(ms.x/CW-.5)*2);hr.style.setProperty('--py',(ms.y/CH-.5)*2)});
+hr.addEventListener('pointerleave',function(){ms.x=ms.y=-999;hr.style.setProperty('--px',0);hr.style.setProperty('--py',0)});
+function scr(t){var el=$('#rot'),i=0,ch='#%&*+=?01',iv=setInterval(function(){el.textContent=t.split('').map(function(c,k){return k<i||c===' '?c:ch[Math.random()*ch.length|0]}).join('');if(i++>=t.length)clearInterval(iv)},32)}
+new IntersectionObserver(function(e){vis=e[0].isIntersecting}).observe($('#home'));
+/* menu */
+var hd=$('#hd'),bu=$('#burger');function mn(o){hd.classList.toggle('open',o);bu.setAttribute('aria-expanded',o);bu.textContent=o?'✕':'☰'}
+bu.addEventListener('click',function(){mn(!hd.classList.contains('open'))});
+document.addEventListener('click',function(e){if(!hd.contains(e.target))mn(false)});
+document.addEventListener('keydown',function(e){if(e.key==='Escape')mn(false)});
+addEventListener('scroll',function(){if(hd.classList.contains('open'))mn(false)},{passive:true});
+$('#links').addEventListener('click',function(){mn(false)});
+$('#f').addEventListener('submit',function(){$('#ok').style.display='block'});
+
+/* spoken introduction */
+var syn=window.speechSynthesis,vb=$('#vb'),sp=$('#sp'),von=false,vq=0;
+var SCRIPT=['Welcome to i dot k dot val.','ikval softwares L L P is a machine learning and artificial intelligence company based in Coimbatore, India.','Our journey with A I and M L started in nineteen ninety four, and the company was founded in twenty sixteen.','We build A I and M L products such as Danta for health diagnostics, DataXtract for invoice extraction, StokBot for stock market prediction, and ProEye for product inspection.','Our capabilities include A I vision, conversational A I, natural language processing, predictive analytics, server log analytics, and E R P.','We serve business, healthcare, manufacturing, and legal industries.','We also provide software testing and automation, with a strong focus on quality.','To see a demo, please use the contact form. Thank you for visiting.'];
+function ls(k,v){try{if(v===undefined)return localStorage.getItem(k);localStorage.setItem(k,v)}catch(e){return null}}
+function vl(){vb.textContent=von?'🔊 Voice on':'🔇 Voice off';vb.classList.toggle('on',von);vb.setAttribute('aria-pressed',von);vb.setAttribute('aria-label',von?'Turn voice off':'Turn voice on and play intro')}
+function say(){syn.cancel();vq++;var v=(syn.getVoices()||[]).filter(function(x){return /^en/i.test(x.lang)}),p=v.filter(function(x){return /en-(IN|GB|US)/i.test(x.lang)})[0]||v[0];SCRIPT.forEach(function(t){var u=new SpeechSynthesisUtterance(t);u.lang=p?p.lang:'en-US';if(p)u.voice=p;u.rate=.97;syn.speak(u)})}
+function setV(on,play){von=on;ls('ikval-voice',on?'on':'off');vl();if(on&&play)say();if(!on)syn.cancel()}
+if(!syn){vb.style.display='none'}else{
+if(ls('ikval-voice')==='off')vl();else{sp.hidden=false;$('#spy').focus()}
+$('#spy').addEventListener('click',function(){sp.hidden=true;setV(true,true)});
+$('#spn').addEventListener('click',function(){sp.hidden=true;setV(false)});
+vb.addEventListener('click',function(){setV(!von,true)});
+addEventListener('pagehide',function(){syn.cancel()});
+document.addEventListener('visibilitychange',function(){document.hidden?syn.pause():syn.resume()})}
+})();
+</script>
+</body>
+</html>
